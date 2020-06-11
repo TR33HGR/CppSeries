@@ -1,10 +1,15 @@
-const char* Log(const char* message)
-{
-  return message;
-}
+#include <iostream>
 
-int Multiply(int a, int b)
+#include "Log.h"
+
+static int Multiply(int a, int b)
 {
   Log("Multiply");
   return a * b;
+}
+
+int main()
+{
+  std::cout << Multiply(5, 8) << std::endl;
+  std::cin.get();
 }
