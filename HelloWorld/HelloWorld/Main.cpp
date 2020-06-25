@@ -1,20 +1,10 @@
 #include <iostream>
 
-int Multiply(int a, int b)
-{
-  return a * b;
-}
-
-void MulitpyAndLog(int a, int b)
-{
-  int result = Multiply(a, b);
-  std::cout << result << std::endl;
-}
+#include "Log.h"
 
 int main()
 {
-  MulitpyAndLog(3, 2);
-  MulitpyAndLog(8, 5);
-  MulitpyAndLog(90, 45);
+  InitLog();
+  Log("Hello World!");
   std::cin.get();
 }
