@@ -4,16 +4,11 @@
 
 int main()
 {
-  int a = 8;
-  a++;
-  const char* string = "Hello";
-
-  for (int i = 0; i < 5; i++)
+  int x = 6;
+  bool comparisonResult = x == 5;
+  if (comparisonResult)
   {
-    const char c = string[i];
-    std::cout << c << std::endl;
+    Log("Hello World!");
   }
-
-  Log("Hello World!");
   std::cin.get();
 }
