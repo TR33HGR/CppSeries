@@ -6,14 +6,10 @@ int main()
 {
   for (int i = 0; i < 5; i++)
   {
+    if (i > 2)
+      break;
     Log("Hello World!");
-  }
-
-  int i = 0;
-  while (i < 5)
-  {
-    Log("Hello World!");
-    i++;
+    std::cout << i << std::endl;
   }
 
   std::cin.get();
