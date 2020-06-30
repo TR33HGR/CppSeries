@@ -1,16 +1,16 @@
 #include <iostream>
 
-#include "Log.h"
+#define LOG(x) cout << x << endl
+
+using namespace std;
 
 int main()
 {
-  for (int i = 0; i < 5; i++)
-  {
-    if (i > 2)
-      break;
-    Log("Hello World!");
-    std::cout << i << std::endl;
-  }
+  char* buffer = new char[8];
+  memset(buffer, 0, 8);
 
+  char ** ptr = &buffer;
+
+  delete[] buffer;
   std::cin.get();
 }
