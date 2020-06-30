@@ -4,13 +4,17 @@
 
 using namespace std;
 
+void Increment(int& value)
+{
+  value++;
+}
+
 int main()
 {
-  char* buffer = new char[8];
-  memset(buffer, 0, 8);
+  int a = 5;
+  Increment(a);
 
-  char ** ptr = &buffer;
+  LOG(a);
 
-  delete[] buffer;
   std::cin.get();
 }
