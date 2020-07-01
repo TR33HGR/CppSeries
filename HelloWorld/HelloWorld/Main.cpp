@@ -4,17 +4,26 @@
 
 using namespace std;
 
-void Increment(int& value)
+class Player
 {
-  value++;
+public:
+
+int x, y;
+int speed;
+
+void Move(int xa, int ya)
+{
+  x += xa * speed;
+  y += ya * speed;
 }
+};
+
+
 
 int main()
 {
-  int a = 5;
-  Increment(a);
-
-  LOG(a);
+  Player player;
+  player.Move(1, -1);
 
   std::cin.get();
 }
