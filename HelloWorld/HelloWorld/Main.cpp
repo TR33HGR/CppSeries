@@ -1,22 +1,33 @@
 #include <iostream>
 
-enum Example : unsigned char
+class Singleton
 {
-  A = 5, B, C,
+  public:
+    static Singleton& Get()
+    {
+      static Singleton instance;
+      return instance;
+    }
+
+    void Hello() {}
 };
 
-int a = 0;
-int b = 1;
-int c = 2;
+void Function()
+{
+  static int i = 0;
+  i++;
+  std::cout << i << std::endl;
+}
 
 int main()
 {
-  Example value = C;
+  Function();
+  Function();
+  Function();
+  Function();
+  Function();
 
-  if (value == 1)
-  {
-    // Do something;
-  }
+  Singleton::Get().Hello();
 
   std::cin.get();
 }
