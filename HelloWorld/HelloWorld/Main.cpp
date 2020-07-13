@@ -1,33 +1,31 @@
 #include <iostream>
 
-class Singleton
+struct Entity
 {
-  public:
-    static Singleton& Get()
-    {
-      static Singleton instance;
-      return instance;
-    }
+  int x, y;
 
-    void Hello() {}
+  static void Print()
+  {
+    std::cout << x << ", " << y << std::endl;
+  }
 };
 
-void Function()
+static void Print(Entity e)
 {
-  static int i = 0;
-  i++;
-  std::cout << i << std::endl;
+  std::cout << e.x << ", " << e.y << std::endl;
 }
 
 int main()
 {
-  Function();
-  Function();
-  Function();
-  Function();
-  Function();
+  Entity e;
+  e.x = 2;
+  e.y = 3;
 
-  Singleton::Get().Hello();
+  Entity e1;
+  e1.x = 5;
+  e1.y = 8;
 
+  Entity::Print();
+  Entity::Print();
   std::cin.get();
 }
