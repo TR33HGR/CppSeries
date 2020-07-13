@@ -1,3 +1,4 @@
+#if 0
 #include <iostream>
 
 class Log
@@ -47,3 +48,4 @@ int main()
   log.Info("Hello");
   std::cin.get();
 }
+#endif
