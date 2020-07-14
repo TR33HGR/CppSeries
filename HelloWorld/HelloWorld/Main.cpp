@@ -9,12 +9,12 @@ public:
   {
     X = 0.0f;
     Y = 0.0f;
+    std::cout << "Created Entity!" << std::endl;
   }
 
-  Entity(float x, float y)
+  ~Entity()
   {
-    X = x;
-    Y = y;
+    std::cout << "Destroyed Entity!" << std::endl;
   }
 
   void Print()
@@ -23,23 +23,14 @@ public:
   }
 };
 
-class Log
+void Function()
 {
-public:
-  Log() = delete;
-
-  static void Write()
-  {
-
-  }
-};
+  Entity e;
+  e.Print();
+}
 
 int main()
 {
-  Log::Write();
-  Log l;
-
-  Entity e(10.0f, 5.0f);
-  e.Print();
+  Function();
   std::cin.get();
 }
