@@ -1,10 +1,21 @@
 #include <iostream>
 #include <string>
 
-class Entity
+class Printable
+{
+public:
+  virtual std::string GetClassName() = 0;
+};
+
+class Entity : public Printable
 {
 public:
   virtual std::string GetName()
+  {
+    return "Entity";
+  }
+
+  std::string GetClassName() override
   {
     return "Entity";
   }
@@ -24,7 +35,26 @@ public:
   {
     return m_Name;
   }
+
+  std::string GetClassName() override
+  {
+    return "Player";
+  }
 };
+
+class A : public Printable
+{
+public:
+  std::string GetClassName() override
+  {
+    return "A";
+  }
+};
+
+void Print(Printable* obj)
+{
+  std::cout << obj->GetClassName() << std::endl;
+}
 
 void PrintName(Entity* entity)
 {
@@ -38,6 +68,11 @@ int main()
 
   Player* p = new Player("Cherno");
   PrintName(p);
+
+  Print(e);
+  Print(p);
+
+  Print(new A());
 
   std::cin.get();
 }
