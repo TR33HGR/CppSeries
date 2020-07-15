@@ -1,35 +1,43 @@
 #include <iostream>
+#include <string>
 
 class Entity
 {
 public:
-  float X, Y;
-
-  void Move(float xa, float ya)
+  virtual std::string GetName()
   {
-    X += xa;
-    Y += ya;
+    return "Entity";
   }
 };
 
 class Player : public Entity
 {
-public:
-  const char* Name;
+private:
+  std::string m_Name;
 
-  void PrintName()
+public:
+  Player(const std::string& name)
+    :m_Name{name}
+  {}
+
+  std::string GetName() override
   {
-    std::cout << Name << std::endl;
+    return m_Name;
   }
 };
 
+void PrintName(Entity* entity)
+{
+  std::cout << entity->GetName() << std::endl;
+}
 
 int main()
 {
-  std::cout << sizeof(Player) << std::endl;
+  Entity* e = new Entity();
+  PrintName(e);
 
-  Player player;
-  player.Move(5.0f, 5.0f);
-  player.X = 2.0f;
+  Player* p = new Player("Cherno");
+  PrintName(p);
+
   std::cin.get();
 }
