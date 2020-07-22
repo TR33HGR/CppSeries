@@ -1,35 +1,68 @@
 #include <iostream>
 #include <string>
 
-#include <stdlib.h>
+class Entity
+{
+private:
+  int m_X, m_Y;
+  int* m_A, *m_B;
+  mutable int var;
+public:
+  int GetX() const
+  {
+    // m_X = 2;
+    var = 2;
+    return m_X;
+  }
+
+  int GetY()
+  {
+    return m_Y;
+  }
+
+  void SetX(int x)
+  {
+    m_X = x;
+  }
+
+  const int* const GetA() const
+  {
+    return m_A;
+  }
+
+};
+
+void PrintEntity(const Entity& e)
+{
+  std::cout << e.GetX() << std::endl;
+  // std::cout << e.GetY() << std::endl;
+}
 
 int main()
 {
-  using namespace std::string_literals;
+  Entity e;
 
-  std::string name0 = "Cherno"s + "hello";
-  std::wstring name0a = L"Cherno"s + L"hello";
+  const int MAX_AGE = 90;
 
-  const char* example = R"(Line1
-Line2
-Line3
-Line3)";
+  const int* a = new int;
+  // int const* a = new int;
 
-const char* ex = "(Line1\n"
-"Line2\n"
-"Line3\n"
-"Line3)\n";
+  // *a = 2;
+  a = (int*)&MAX_AGE;
+  std::cout << *a << std::endl;
 
-  const char* name = u8"Che\0rno";
-  //name[2] = 'a';
-  std::cout << strlen(name) << std::endl;
+  int* const b = new int;
 
-  char name2[] = "Che\0rno";
-  name2[2] = 'a'; // works on a copy of Cherno
+  *b = 2;
+  // b = (int*)&MAX_AGE;
+  std::cout << *b << std::endl;
 
-  const wchar_t* name3 = L"Cherno";
-  const char16_t* name3 = u"Cherno";
-  const char32_t* name3 = U"Cherno";
+  const int* const c = new int;
+
+  //*c = 2;
+  // b = (int*)&MAX_AGE;
+  std::cout << *c << std::endl;
+
 
   std::cin.get();
 }
