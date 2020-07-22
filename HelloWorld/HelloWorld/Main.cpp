@@ -1,20 +1,35 @@
 #include <iostream>
 #include <string>
 
-void PrintString(const std::string& string)
-{
-  std::cout << string << std::endl;
-}
+#include <stdlib.h>
 
 int main()
 {
-  std::string name = "Cherno";
-  name += " hello!";
-  std::string name2 = std::string("Cherno") + " hello!";
-  bool contains = name.find("no") != std::string::npos;
-  name.size();
-  //char name2[7] = { 'C', 'h', 'e', 'r', 'n', 'o', 0 };
-  std::cout << name << std::endl;
+  using namespace std::string_literals;
+
+  std::string name0 = "Cherno"s + "hello";
+  std::wstring name0a = L"Cherno"s + L"hello";
+
+  const char* example = R"(Line1
+Line2
+Line3
+Line3)";
+
+const char* ex = "(Line1\n"
+"Line2\n"
+"Line3\n"
+"Line3)\n";
+
+  const char* name = u8"Che\0rno";
+  //name[2] = 'a';
+  std::cout << strlen(name) << std::endl;
+
+  char name2[] = "Che\0rno";
+  name2[2] = 'a'; // works on a copy of Cherno
+
+  const wchar_t* name3 = L"Cherno";
+  const char16_t* name3 = u"Cherno";
+  const char32_t* name3 = U"Cherno";
 
   std::cin.get();
 }
