@@ -1,55 +1,27 @@
 #include <iostream>
 #include <string>
 
-class Example
-{
-public:
-  Example()
-  {
-    std::cout << "Created Entity!" << std::endl;
-  }
-
-  Example(int x)
-  {
-    std::cout << "Created Entity with " << x << std::endl;
-  }
-};
-
-class Entity
-{
-private:
-  std::string m_Name;
-  int m_Score;
-  Example m_Example;
-public:
-  Entity()
-    : m_Name("Unknown")
-    , m_Score(0)
-  {
-    m_Example = Example(8);
-  }
-
-  Entity(const std::string& name)
-    : m_Name(name)
-    , m_Score(0)
-    , m_Example(9)
-  {
-    m_Name = name;
-  }
-
-  const std::string& GetName() const
-  {
-    return m_Name;
-  }
-};
+static int s_Level = 1;
+static int s_Speed = 2;
 
 int main()
 {
-  Entity e0;
-  std::cout << e0.GetName() << std::endl;
+  if (s_Level > 5)
+    s_Speed = 10;
+  else
+    s_Speed = 5;
 
-  Entity e1("Cherno");
-  std::cout << e1.GetName() << std::endl;
+  s_Speed = s_Level > 5 && s_level < 100 ? s_Level > 10 ? 15 : 10 : 5;
+
+  std::cout << s_Speed << std::endl;
+
+  std::string rank = s_Level > 10 ? "Master" : "Beginner";
+
+  std::string otherRank;
+  if (s_Level > 10)
+    otherRank = "Master";
+  else
+    otherRank = "Beginner";
 
   std::cin.get();
 }
