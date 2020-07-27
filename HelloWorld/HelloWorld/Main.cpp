@@ -1,35 +1,55 @@
 #include <iostream>
 #include <string>
 
+class Example
+{
+public:
+  Example()
+  {
+    std::cout << "Created Entity!" << std::endl;
+  }
+
+  Example(int x)
+  {
+    std::cout << "Created Entity with " << x << std::endl;
+  }
+};
+
 class Entity
 {
 private:
   std::string m_Name;
-  mutable int m_DebugCount = 0;
+  int m_Score;
+  Example m_Example;
 public:
+  Entity()
+    : m_Name("Unknown")
+    , m_Score(0)
+  {
+    m_Example = Example(8);
+  }
+
+  Entity(const std::string& name)
+    : m_Name(name)
+    , m_Score(0)
+    , m_Example(9)
+  {
+    m_Name = name;
+  }
+
   const std::string& GetName() const
   {
-    ++m_DebugCount;
     return m_Name;
   }
 };
 
 int main()
 {
-  const Entity e;
-  e.GetName();
+  Entity e0;
+  std::cout << e0.GetName() << std::endl;
 
-  int x = 8;
-  auto f = [=]() mutable
-  {
-    ++x;
-    std::cout << x << std::endl;
-  };
-
-  f();
-  f();
-
-  std::cout << x << std::endl;
+  Entity e1("Cherno");
+  std::cout << e1.GetName() << std::endl;
 
   std::cin.get();
 }
