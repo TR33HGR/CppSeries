@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string>
 
 using String = std::string;
@@ -24,20 +25,14 @@ public:
 
 int main()
 {
-  Entity* e;
-  {
-    Entity entity("Cherno");
-    e = &entity;
-    std::cout << entity.GetName() << std::endl;
-  }
+  int a = 2;
+  int* b = new int[50]; // 200 bytes
 
-  Entity* e2;
-  {
-    Entity* entity = new Entity("Cherno2");
-    e2 = entity;
-    std::cout << entity->GetName() << std::endl;
-  }
+  Entity* e = new(b) Entity();
+  // Entity* e = (Entity*)malloc(sizeof(Entity));
+
+  delete e;
+  delete[] b;
 
   std::cin.get();
-  delete e2;
 }
