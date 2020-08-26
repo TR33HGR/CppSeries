@@ -1,53 +1,66 @@
 #include <iostream>
 #include <string>
 
-class Entity
+struct Vector2
 {
-private:
-  std::string m_Name;
-  int m_Age;
-public:
-  Entity(const std::string& name)
-    : m_Name{name}
-    , m_Age{-1}
+  float x, y;
+
+  Vector2(float x, float y)
+    : x{x}
+    , y{y}
   {}
 
-  Entity(int age)
-    : m_Name{std::string{"Unknown"}}
-    , m_Age{age}
-  {}
+  Vector2 Add(const Vector2& other) const
+  {
+    //return Vector2{x + other.x, y + other.y};
+    //return *this + other;
+    return operator+(other);
+  }
+
+  Vector2 Multiply(const Vector2& other) const
+  {
+    //return Vector2{x * other.x, y * other.y};
+    return *this * other;
+  }
+
+  Vector2 operator+(const Vector2& other) const
+  {
+    return Vector2{x + other.x, y + other.y};
+  }
+
+  Vector2 operator*(const Vector2& other) const
+  {
+    return Vector2{x * other.x, y * other.y};
+  }
+
+  bool operator==(const Vector2& other) const
+  {
+    return x == other.x && y == other.y;
+  }
+
+  bool operator!=(const Vector2& other) const
+  {
+    return !(*this == other);
+    //return !operator==(other);
+  }
 };
 
-class Entity2
+std::ostream& operator<<(std::ostream& stream, const Vector2& other)
 {
-private:
-  std::string m_Name;
-  int m_Age;
-public:
-  explicit Entity2(int age)
-    : m_Name{std::string{"Unknown"}}
-    , m_Age{age}
-  {}
-};
-
-void PrintEntity(const Entity& entity)
-{
-  // Print
+  stream << other.x << ", " << other.y;
+  return stream;
 }
 
 int main()
 {
-  PrintEntity(22);
-  PrintEntity(std::string{"Cherno"});
+  Vector2 position{4.0f, 4.0f};
+  Vector2 speed{0.5f, 0.5f};
+  Vector2 powerup{1.1f, 1.1f};
 
-  Entity a{"Cherno"};
-  Entity b{22};
+  Vector2 result = position.Add(speed.Multiply(powerup));
+  Vector2 result2 = position + speed * powerup;
 
-  Entity c = {"Cherno"};
-  Entity d = 22;
-
-  Entity2 e{22};
-  //Entity2 f = 22;
+  std::cout << result2 << std::endl;
 
   std::cin.get();
 }
