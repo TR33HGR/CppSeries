@@ -1,38 +1,53 @@
 #include <iostream>
-#include <stdlib.h>
 #include <string>
-
-using String = std::string;
 
 class Entity
 {
 private:
-  String m_Name;
+  std::string m_Name;
+  int m_Age;
 public:
-  Entity()
-    : m_Name("Unknown")
+  Entity(const std::string& name)
+    : m_Name{name}
+    , m_Age{-1}
   {}
 
-  Entity(const String& name)
-    : m_Name(name)
+  Entity(int age)
+    : m_Name{std::string{"Unknown"}}
+    , m_Age{age}
   {}
-
-  const String& GetName() const
-  {
-    return m_Name;
-  }
 };
+
+class Entity2
+{
+private:
+  std::string m_Name;
+  int m_Age;
+public:
+  explicit Entity2(int age)
+    : m_Name{std::string{"Unknown"}}
+    , m_Age{age}
+  {}
+};
+
+void PrintEntity(const Entity& entity)
+{
+  // Print
+}
 
 int main()
 {
-  int a = 2;
-  int* b = new int[50]; // 200 bytes
+  PrintEntity(22);
+  PrintEntity(std::string{"Cherno"});
 
-  Entity* e = new(b) Entity();
-  // Entity* e = (Entity*)malloc(sizeof(Entity));
+  Entity a{"Cherno"};
+  Entity b{22};
 
-  delete e;
-  delete[] b;
+  Entity c = {"Cherno"};
+  Entity d = 22;
+
+  Entity2 e{22};
+  //Entity2 f = 22;
 
   std::cin.get();
 }
