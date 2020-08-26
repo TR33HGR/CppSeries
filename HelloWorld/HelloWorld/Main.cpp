@@ -1,43 +1,61 @@
 #include <iostream>
 #include <string>
 
-void PrintEntity(const Entity&);
-
 class Entity
 {
 public:
-  int x, y;
-
-  Entity(int x, int y)
+  Entity()
   {
-    Entity* e = this;
-
-    e->x = x;
-    this->y = y;
-
-    Entity& e = *this;
-
-    PrintEntity(*this);
-
-    delete this;
+    std::cout << "Created Entity!" << std::endl;
   }
 
-  int GetX() const
+  ~Entity()
   {
-    const Entity* e = this;
-    const Entity& e2 = *this;
+    std::cout << "Destroyed Entity!" << std::endl;
+  }
 
-    return x;
+private:
+  int x;
+};
+
+int* CreateArray()
+{
+  // int array[50];
+  int* array = new int[50];
+  return array;
+}
+
+void FillArray(int* array)
+{
+  // fill array
+}
+
+class ScopedPtr
+{
+private:
+  Entity* m_Ptr;
+public:
+  ScopedPtr(Entity* ptr)
+    : m_Ptr{ptr}
+  {}
+
+  ~ScopedPtr()
+  {
+    delete m_Ptr;
   }
 };
 
-void PrintEntity(const Entity& e)
-{
-    // Print
-}
-
 int main()
 {
+  int array[50];
+  FillArray(array);
+
+  {
+    Entity e;
+    Entity* e2 = new Entity();
+    ScopedPtr e3 = new Entity();
+    ScopedPtr e4{new Entity};
+  }
 
   std::cin.get();
 }
