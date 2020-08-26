@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <memory>
 
 class Entity
 {
@@ -14,47 +15,27 @@ public:
     std::cout << "Destroyed Entity!" << std::endl;
   }
 
-private:
-  int x;
-};
-
-int* CreateArray()
-{
-  // int array[50];
-  int* array = new int[50];
-  return array;
-}
-
-void FillArray(int* array)
-{
-  // fill array
-}
-
-class ScopedPtr
-{
-private:
-  Entity* m_Ptr;
-public:
-  ScopedPtr(Entity* ptr)
-    : m_Ptr{ptr}
+  void Print()
   {}
-
-  ~ScopedPtr()
-  {
-    delete m_Ptr;
-  }
 };
+
 
 int main()
 {
-  int array[50];
-  FillArray(array);
-
   {
-    Entity e;
-    Entity* e2 = new Entity();
-    ScopedPtr e3 = new Entity();
-    ScopedPtr e4{new Entity};
+    std::shared_ptr<Entity> e0;
+    std::weak_ptr<Entity> weakEntity;
+    {
+      std::unique_ptr<Entity> entity{new Entity};
+      std::unique_ptr<Entity> entity2 = std::make_unique<Entity>();
+      //std::unique_ptr<Entity> e0 = entity;
+      std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
+      weakEntity = sharedEntity;
+      e0 = sharedEntity;
+
+      entity->Print();
+      entity2->Print();
+    }
   }
 
   std::cin.get();
