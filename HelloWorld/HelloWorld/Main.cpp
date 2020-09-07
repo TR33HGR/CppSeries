@@ -1,52 +1,37 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
-class Entity
+struct Vertex
 {
-public:
-  int x;
-  void Print() const
-  {
-    std::cout << "Hello!" << std::endl;
-  }
+  float x, y, z;
 };
 
-class ScopedPtr
+std::ostream& operator<<(std::ostream& stream, const Vertex& vertex)
 {
-private:
-  Entity* m_Obj;
-public:
-  ScopedPtr(Entity* entity)
-    : m_Obj{entity}
-  {}
-  ~ScopedPtr()
-  {
-    delete m_Obj;
-  }
-  Entity* operator->()
-  {
-    return m_Obj;
-  }
-  const Entity* operator->() const
-  {
-    return m_Obj;
-  }
-};
+  stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
+  return stream;
+}
 
-struct Vector3
+void Function(const std::vector<Vertex>& vertices)
 {
-  float x, z, y;
-};
+
+}
 
 int main()
 {
-  const ScopedPtr entity = new Entity();
-  entity->Print();
+  std::vector<Vertex> vertices;
+  vertices.push_back({1, 2, 3});
+  vertices.push_back({4, 5, 6});
 
-  int offsetX = (int)&((Vector3*)nullptr)->x;
-  int offsetY = (int)&((Vector3*)nullptr)->y;
-  int offsetZ = (int)&((Vector3*)nullptr)->z;
-  std::cout << offsetY << std::endl;
+  for (int i = 0; i < vertices.size(); i++)
+    std::cout << vertices[i] << std::endl;
+
+  vertices.erase(vertices.begin() + 1);
+  vertices.clear();
+
+  for (Vertex& v : vertices)
+    std::cout << v << std::endl;
 
   std::cin.get();
 }
