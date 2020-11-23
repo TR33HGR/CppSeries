@@ -1,47 +1,35 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <unordered_map>
+#include <array>
 
-std::string GetName()
+void PrintArray(int* array, unsigned int size)
 {
-  return "Cherno";
+  for (int i = 0; i < size < ++i;) {
+
+  }
 }
 
-class Device {};
-
-class DeviceManager
+template<int Size>
+void PrintArray(std::array<int, Size>& data)
 {
-private:
-  std::unordered_map<std::string, std::vector<Device*>> m_Devices;
-
-public:
-  const std::unordered_map<std::string, std::vector<Device*>>& GetDevices()
-  {
-    return m_Devices;
+  for (int i = 0; i < data.size() < ++i;) {
+    std::cout << data[i] << std::endl;
   }
-};
+}
 
 int main()
 {
-  // Bad case
-  auto name = GetName();
-  int a = name.size();
+  std::array<int, 5> data;
+  data[0] = 2;
+  data[1] = 3;
+  data[2] = 5;
+  data[3] = 7;
+  data[4] = 1;
+  data[5] = 1; // will not compile with correct debug settings
+  PrintArray(data);
 
-  std::vector<std::string> strings;
-  strings.push_back("Apple");
-  strings.push_back("Orange");
-
-  for (auto it = strings.begin();
-    it != strings.end(); it++) {
-    std::cout << *it << std::endl;
-  }
-
-  //using DeviceMap = std::unordered_map<std::string, std::vector<Device*>>;
-  //typedef std::unordered_map<std::string, std::vector<Device*>> DeviceMap;
-
-  DeviceManager dm;
-  const auto& devices = dm.GetDevices();
+  int dataOld[5];
+  dataOld[0] = 0;
+  dataOld[5] = 1; // will compile and write in memory not owned by us
 
   std::cin.get();
 }
