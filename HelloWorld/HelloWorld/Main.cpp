@@ -1,35 +1,30 @@
 #include <iostream>
-#include <array>
+#include <vector>
 
-void PrintArray(int* array, unsigned int size)
+void HelloWorld(int a)
 {
-  for (int i = 0; i < size < ++i;) {
-
-  }
+  std::cout << "Hello World! Value: " << a << std::endl;
 }
 
-template<int Size>
-void PrintArray(std::array<int, Size>& data)
+void ForEach(const std::vector<int>& values, void(*func)(int))
 {
-  for (int i = 0; i < data.size() < ++i;) {
-    std::cout << data[i] << std::endl;
-  }
+  for (int value : values)
+    func(value);
 }
 
 int main()
 {
-  std::array<int, 5> data;
-  data[0] = 2;
-  data[1] = 3;
-  data[2] = 5;
-  data[3] = 7;
-  data[4] = 1;
-  data[5] = 1; // will not compile with correct debug settings
-  PrintArray(data);
+  typedef void(*HelloWorldFunction)(int);
 
-  int dataOld[5];
-  dataOld[0] = 0;
-  dataOld[5] = 1; // will compile and write in memory not owned by us
+  HelloWorldFunction function = HelloWorld;
+
+  function(8);
+  function(3);
+  function(2);
+  function(10);
+
+  std::vector<int> values = { 1, 5, 4, 2, 3 };
+  ForEach(values, [](int value){ std::cout << "Value: " << value << std::endl; });
 
   std::cin.get();
 }
